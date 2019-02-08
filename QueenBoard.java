@@ -58,6 +58,47 @@ public class QueenBoard{
     // if there is a queen in the specified location, remove the queen there and return true
     if (board[r][c] == -1){
       board[r][c] = 0;
+
+      // changing values across the board
+      for (int across = r; across < big && across > 0; across++){
+        if (board[across][c] > 0){
+          board[across][c] = board[across][c] - 1;
+        }
+      }
+      for (int across = r; across < big && across > 0; across--){
+        if (board[across][c] > 0){
+          board[across][c] = board[across][c] - 1;
+        }
+      }
+
+      // changing values down the board
+      for (int down = c; down < big && down > 0; down++){
+        if (board[r][down] > 0){
+          board[r][down] = board[r][down] - 1;
+        }
+      }
+      for (int down = c; down < big && down > 0; down--){
+        if (board[r][down] > 0){
+          board[r][down] = board[r][down] - 1;
+        }
+      }
+
+      // changing values diagonal the board
+      for (int across = r; across < big && across > 0; across++){
+        for (int down = c; down < big && down > 0; down--){
+          if (board[across][down] > 0){
+            board[across][down] = board[across][down] - 1;
+          }
+        }
+      }
+      for (int across = r; across < big && across > 0; across--){
+        for (int down = c; down < big && down > 0; down++){
+          if (board[across][down] > 0){
+            board[across][down] = board[across][down] - 1;
+          }
+        }
+      }
+      
       return true;
     }
     // else, don't remove anything and return false
