@@ -30,14 +30,24 @@ public class QueenBoard{
       }
 
       // changing values down the board
-      for (int down = c; down < big && big > 0; big++){
+      for (int down = c; down < big && down > 0; down++){
         board[r][down] = board[r][down] + 1;
       }
-      for (int down = c; down < big && big > 0; big--){
+      for (int down = c; down < big && down > 0; down--){
         board[r][down] = board[r][down] + 1;
       }
 
       // changing values diagonal the board
+      for (int across = r; across < big && across > 0; across++){
+        for (int down = c; down < big && down > 0; down--){
+          board[across][down] = board[across][down] + 1;
+        }
+      }
+      for (int across = r; across < big && across > 0; across--){
+        for (int down = c; down < big && down > 0; down++){
+          board[across][down] = board[across][down] + 1;
+        }
+      }
 
       return true;
     }
