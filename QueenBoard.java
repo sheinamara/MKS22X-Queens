@@ -98,7 +98,7 @@ public class QueenBoard{
           }
         }
       }
-      
+
       return true;
     }
     // else, don't remove anything and return false
@@ -120,7 +120,21 @@ public class QueenBoard{
   *(pythonic string notation for clarity,
   *excludes the character up to the *)
   */
-  public String toString(){}
+  public String toString(){
+    String output = "";
+    for (int x = 0; x < size; x++){
+      for (int y = 0; y < size; y++){
+        if (board[x][y] == -1){
+          output = output + "Q";
+        }
+        else{
+          output = output + "_";
+        }
+      }
+      output = output + "\n";
+    }
+    return output;
+  }
 
 
 
