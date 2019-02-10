@@ -5,6 +5,10 @@ public class QueenBoard{
 
   // constructor
   public QueenBoard(int size){
+    // if the size is negative
+    if (size < 0){
+      throw new IllegalArgumentException("The board size cannot be negative!");
+    }
     board = new int[size][size];
     for (int x = 0; x < size; x++){
       for (int y = 0; y < size; y++){
@@ -15,7 +19,7 @@ public class QueenBoard{
 
   // private methods (suggested)
   private boolean addQueen(int r, int c){
-    int big = board.size();
+    int big = board.length;
     // if it is an empty, nonthreatening space, place a queen there and return true
     if (board[r][c] == 0){
       // making the space have a queen
@@ -55,6 +59,7 @@ public class QueenBoard{
     return false;
   }
   private boolean removeQueen(int r, int c){
+    int big = board.length;
     // if there is a queen in the specified location, remove the queen there and return true
     if (board[r][c] == -1){
       board[r][c] = 0;
@@ -122,16 +127,17 @@ public class QueenBoard{
   */
   public String toString(){
     String output = "";
-    for (int x = 0; x < size; x++){
-      for (int y = 0; y < size; y++){
+    for (int x = 0; x < board.length; x++){
+      String line = "";
+      for (int y = 0; y < board[x].length; y++){
         if (board[x][y] == -1){
-          output = output + "Q";
+          line = line + "Q";
         }
         else{
-          output = output + "_";
+          line = line + "_";
         }
       }
-      output = output + "\n";
+      output = line + "\n";
     }
     return output;
   }
@@ -146,7 +152,31 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
 
   */
-  public boolean solve(){}
+  public boolean solve(){
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board.length; c++){
+        if (board[r][c] != 0){
+          throw new IllegalStateException();
+        }
+      }
+    }
+    return solveHelper(0);
+  }
+
+  public boolean solveHelper(int col){
+    if (col == board.length){
+      return true;
+    }
+    for (int row = 0; row < board.length; row++){
+      if (addQueen(row, col)){
+        if (solveHelper(col + 1)){
+          return true;
+        }
+        removeQueen(row, col);
+      }
+    }
+    return false;
+  }
 
   /**
   *@return the number of solutions found, and leaves the board filled with only 0's
