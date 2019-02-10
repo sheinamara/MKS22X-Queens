@@ -154,7 +154,7 @@ public class QueenBoard{
   */
   public boolean solve(){
     for (int r = 0; r < board.length; r++){
-      for (int c = 0; c < board.length; c++){
+      for (int c = 0; c < board[r].length; c++){
         if (board[r][c] != 0){
           throw new IllegalStateException();
         }
@@ -182,5 +182,28 @@ public class QueenBoard{
   *@return the number of solutions found, and leaves the board filled with only 0's
   *@throws IllegalStateException when the board starts with any non-zero value
   */
-  public int countSolutions(){}
+  public int countSolutions(){
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; r++){
+        if (board[r][c] != 0){
+          throw new IllegalStateException();
+        }
+      }
+    }
+    return countSolutionsHelper(0);
+  }
+
+  public int countSolutionsHelper(int col){
+    int numSolutions = 0;
+    if (col == board.length){
+      return 1;
+    }
+    for (int row = 0; row < board.length; row++){
+      if (addQueen(row, col)){
+        numSolutions = numSolutions + countSolutionsHelper(col + 1);
+        removeQueen(row, col);
+      }
+    }
+    return numSolutions;
+  }
 }
