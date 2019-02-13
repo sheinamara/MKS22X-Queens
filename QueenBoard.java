@@ -1,4 +1,29 @@
 public class QueenBoard{
+  // TESTING
+  public static void main(String[] args){
+    QueenBoard board1 = new QueenBoard(8);
+
+    // should print out empty board
+    System.out.println(board1);
+
+    board1.addQueen(0,0);
+
+    // should print out one queen on upper left
+    System.out.println(board1);
+
+    board1.addQueen(0,1);
+    board1.addQueen(6,6);
+    board1.addQueen(1,1); // testing diagonal
+
+    // should have two queens
+    System.out.println(board1);
+
+    board1.removeQueen(2,1);
+    board1.removeQueen(0,0);
+
+    // should have no queens
+    System.out.println(board1);
+  }
 
   // instance variables
   private int[][]board;
@@ -20,11 +45,19 @@ public class QueenBoard{
   // private methods (suggested)
   private boolean addQueen(int r, int c){
     int big = board.length;
+
     // if it is an empty, nonthreatening space, place a queen there and return true
     if (board[r][c] == 0){
       // making the space have a queen
       board[r][c] = -1;
 
+      for (int i = 0; i < big; board[r][c+i]++){}
+
+      for (int i = 0; i < big; board[r-i][c+i]++){}
+
+      for (int i = 0; i < big; board[r+i][c]++){}
+
+      /*
       // changing values across the board
       for (int across = r; across < big && across > 0; across++){
         board[across][c] = board[across][c] + 1;
@@ -43,15 +76,16 @@ public class QueenBoard{
 
       // changing values diagonal the board
       for (int across = r; across < big && across > 0; across++){
-        for (int down = c; down < big && down > 0; down--){
-          board[across][down] = board[across][down] + 1;
-        }
-      }
-      for (int across = r; across < big && across > 0; across--){
         for (int down = c; down < big && down > 0; down++){
           board[across][down] = board[across][down] + 1;
         }
       }
+      for (int across = r; across < big && across > 0; across++){
+        for (int down = c; down < big && down > 0; down++){
+          board[across][down] = board[across][down] + 1;
+        }
+      }
+      */
 
       return true;
     }
@@ -90,13 +124,13 @@ public class QueenBoard{
 
       // changing values diagonal the board
       for (int across = r; across < big && across > 0; across++){
-        for (int down = c; down < big && down > 0; down--){
+        for (int down = c; down < big && down > 0; down++){
           if (board[across][down] > 0){
             board[across][down] = board[across][down] - 1;
           }
         }
       }
-      for (int across = r; across < big && across > 0; across--){
+      for (int across = r; across < big && across > 0; across++){
         for (int down = c; down < big && down > 0; down++){
           if (board[across][down] > 0){
             board[across][down] = board[across][down] - 1;
@@ -128,16 +162,15 @@ public class QueenBoard{
   public String toString(){
     String output = "";
     for (int x = 0; x < board.length; x++){
-      String line = "";
-      for (int y = 0; y < board[x].length; y++){
+      for (int y = 0; y < board.length; y++){
         if (board[x][y] == -1){
-          line = line + "Q";
+          output = output + "Q";
         }
         else{
-          line = line + "_";
+          output = output + board[x][y];
         }
       }
-      output = line + "\n";
+      output = output + "\n";
     }
     return output;
   }
