@@ -51,11 +51,17 @@ public class QueenBoard{
       // making the space have a queen
       board[r][c] = -1;
 
-      for (int i = 0; i < big; board[r][c+i]++){}
+      for (int i = 0; i < big; i++){
+        board[r][c+i]++;
+      }
 
-      for (int i = 0; i < big; board[r-i][c+i]++){}
+      for (int i = 0; i < big; i++){
+        board[r-i][c+i]++;
+      }
 
-      for (int i = 0; i < big; board[r+i][c]++){}
+      for (int i = 0; i < big; i++){
+        board[r-i][c+i]++;
+      }
 
       /*
       // changing values across the board
