@@ -11,11 +11,10 @@ public class QueenBoard{
     // should print out one queen on upper left
     System.out.println(board1);
 
-    board1.addQueen(0,1);
-    board1.addQueen(6,6);
-    board1.addQueen(1,1); // testing diagonal
+//    board1.addQueen(0,1);
+    board1.addQueen(4,3);
+//    board1.addQueen(1,1); // testing diagonal
 
-    // should have two queens
     System.out.println(board1);
 
     board1.removeQueen(2,1);
@@ -43,6 +42,10 @@ public class QueenBoard{
   }
 
   // private methods (suggested)
+  private boolean onBoard(int r, int c, int size){
+    return (r < size || r >= 0 || c < size || c >= 0);
+  }
+
   private boolean addQueen(int r, int c){
     int big = board.length;
 
@@ -51,47 +54,23 @@ public class QueenBoard{
       // making the space have a queen
       board[r][c] = -1;
 
-      for (int i = 0; i < big; i++){
-        board[r][c+i]++;
-      }
-
-      for (int i = 0; i < big; i++){
-        board[r-i][c+i]++;
-      }
-
-      for (int i = 0; i < big; i++){
-        board[r-i][c+i]++;
-      }
-
-      /*
-      // changing values across the board
-      for (int across = r; across < big && across > 0; across++){
-        board[across][c] = board[across][c] + 1;
-      }
-      for (int across = r; across < big && across > 0; across--){
-        board[across][c] = board[across][c] + 1;
-      }
-
-      // changing values down the board
-      for (int down = c; down < big && down > 0; down++){
-        board[r][down] = board[r][down] + 1;
-      }
-      for (int down = c; down < big && down > 0; down--){
-        board[r][down] = board[r][down] + 1;
-      }
-
-      // changing values diagonal the board
-      for (int across = r; across < big && across > 0; across++){
-        for (int down = c; down < big && down > 0; down++){
-          board[across][down] = board[across][down] + 1;
+      for (int i = 0; onBoard(r,c+i,big); i++){
+        if (board[r][c+i] != -1){
+          board[r][c+i]++;
         }
       }
-      for (int across = r; across < big && across > 0; across++){
-        for (int down = c; down < big && down > 0; down++){
-          board[across][down] = board[across][down] + 1;
+
+      for (int i = 0; onBoard(i-r,c+i,big); i++){
+        if (board[i-r][c+i] != -1){
+          board[i-r][c+i]++;
         }
       }
-      */
+
+      for (int i = 0; onBoard(r+i,c,big); i++){
+        if (board[r+i][c] != -1){
+          board[r+i][c]++;
+        }
+      }
 
       return true;
     }
@@ -104,43 +83,21 @@ public class QueenBoard{
     if (board[r][c] == -1){
       board[r][c] = 0;
 
-      // changing values across the board
-      for (int across = r; across < big && across > 0; across++){
-        if (board[across][c] > 0){
-          board[across][c] = board[across][c] - 1;
-        }
-      }
-      for (int across = r; across < big && across > 0; across--){
-        if (board[across][c] > 0){
-          board[across][c] = board[across][c] - 1;
+      for (int i = 0; i < big; i++){
+        if (board[r][c+i] != -1){
+          board[r][c+i]--;
         }
       }
 
-      // changing values down the board
-      for (int down = c; down < big && down > 0; down++){
-        if (board[r][down] > 0){
-          board[r][down] = board[r][down] - 1;
-        }
-      }
-      for (int down = c; down < big && down > 0; down--){
-        if (board[r][down] > 0){
-          board[r][down] = board[r][down] - 1;
+      for (int i = 0; i < big; i++){
+        if (board[r][c+i] != -1){
+          board[i-r][c+i]--;
         }
       }
 
-      // changing values diagonal the board
-      for (int across = r; across < big && across > 0; across++){
-        for (int down = c; down < big && down > 0; down++){
-          if (board[across][down] > 0){
-            board[across][down] = board[across][down] - 1;
-          }
-        }
-      }
-      for (int across = r; across < big && across > 0; across++){
-        for (int down = c; down < big && down > 0; down++){
-          if (board[across][down] > 0){
-            board[across][down] = board[across][down] - 1;
-          }
+      for (int i = 0; i < big; i++){
+        if (board[r][c+i] != -1){
+          board[r+i][c]--;
         }
       }
 
