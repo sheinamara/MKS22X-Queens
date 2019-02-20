@@ -42,68 +42,127 @@ public class QueenBoard{
   }
 
   // private methods (suggested)
-  private boolean onBoard(int r, int c, int size){
-    return (r < size || r >= 0 || c < size || c >= 0);
+  private boolean onBoard(int r, int c){
+    if (board[r][c] != 0 || r >= board.length || c >= board.length){
+      return false;
+    }
+    return true;
   }
 
   private boolean addQueen(int r, int c){
-    int big = board.length;
+    // added an extra thingy here
+    if (onBoard(r, c)){
+      // horizontal
+      for (int i = 0; i < board[r].length; i++){
+        board[r][i]++;
+      }
 
-    // if it is an empty, nonthreatening space, place a queen there and return true
-    if (board[r][c] == 0){
+      // vertical
+      for (int i = 0; i < board.length; i++){
+        board[i][c]++;;
+      }
+
+      // diagonal
+
+      // decrease first value
+      int x = r - 1;
+      int y = c + 1;
+      while (y < board.length && x >= 0){
+        board[x][y]++;
+        x--;
+        y++;
+      }
+
+      // decrease second value
+      x = r + 1;
+      y = c - 1;
+      while (y >= 0 && x < board.length){
+        board[x][y]++;
+        x++;
+        y--;
+      }
+
+      // decrease both values
+      x = r - 1;
+      y = c - 1;
+      while (x >= 0 && y >= 0){
+        board[x][y]++;
+        x--;
+        y--;
+      }
+
+      // increase both values
+      x = r + 1;
+      y = c + 1;
+      while (x < board.length && y < board.length){
+        board[x][y]++;
+        x++;
+        y++;
+      }
+
       // making the space have a queen
       board[r][c] = -1;
-
-      for (int i = 0; onBoard(r,c+i,big); i++){
-        if (board[r][c+i] != -1){
-          board[r][c+i]++;
-        }
-      }
-
-      for (int i = 0; onBoard(i-r,c+i,big); i++){
-        if (board[i-r][c+i] != -1){
-          board[i-r][c+i]++;
-        }
-      }
-
-      for (int i = 0; onBoard(r+i,c,big); i++){
-        if (board[r+i][c] != -1){
-          board[r+i][c]++;
-        }
-      }
-
       return true;
     }
     // else, don't add anything and return false
     return false;
   }
+
   private boolean removeQueen(int r, int c){
-    int big = board.length;
-    // if there is a queen in the specified location, remove the queen there and return true
-    if (board[r][c] == -1){
+    if (board[r][c] == -1 || r < board.length || c < board.length){
+      // horizontal
+      for (int i = 0; i < board[r].length; i++){
+        board[r][i]--;
+      }
+
+      // vertical
+      for (int i = 0; i < board.length; i++){
+        board[i][c]--;;
+      }
+
+      // diagonal
+
+      // decrease first value
+      int x = r - 1;
+      int y = c + 1;
+      while (y < board.length && x >= 0){
+        board[x][y]--;
+        x--;
+        y++;
+      }
+
+      // decrease second value
+      x = r + 1;
+      y = c - 1;
+      while (y >= 0 && x < board.length){
+        board[x][y]--;
+        x++;
+        y--;
+      }
+
+      // decrease both values
+      x = r - 1;
+      y = c - 1;
+      while (x >= 0 && y >= 0){
+        board[x][y]--;
+        x--;
+        y--;
+      }
+
+      // increase both values
+      x = r + 1;
+      y = c + 1;
+      while (x < board.length && y < board.length){
+        board[x][y]--;
+        x++;
+        y++;
+      }
+
+      // making the space not have a queen
       board[r][c] = 0;
-
-      for (int i = 0; i < big; i++){
-        if (board[r][c+i] != -1){
-          board[r][c+i]--;
-        }
-      }
-
-      for (int i = 0; i < big; i++){
-        if (board[r][c+i] != -1){
-          board[i-r][c+i]--;
-        }
-      }
-
-      for (int i = 0; i < big; i++){
-        if (board[r][c+i] != -1){
-          board[r+i][c]--;
-        }
-      }
-
       return true;
+
     }
-    // else, don't remove anything and return false
     return false;
   }
 
