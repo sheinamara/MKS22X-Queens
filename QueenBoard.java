@@ -11,14 +11,17 @@ public class QueenBoard{
     // should print out one queen on upper left
     System.out.println(board1);
 
-//    board1.addQueen(0,1);
+    board1.addQueen(0,1);
     board1.addQueen(4,3);
-//    board1.addQueen(1,1); // testing diagonal
+    board1.addQueen(1,1); // testing diagonal
 
     System.out.println(board1);
 
     board1.removeQueen(2,1);
     board1.removeQueen(0,0);
+    board1.removeQueen(0,1);
+    board1.removeQueen(4,3);
+    board1.removeQueen(1,1);
 
     // should have no queens
     System.out.println(board1);
