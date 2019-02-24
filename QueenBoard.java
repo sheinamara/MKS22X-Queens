@@ -112,7 +112,7 @@ public class QueenBoard{
   }
 
   private boolean removeQueen(int r, int c){
-    if (board[r][c] == -1 || r < board.length || c < board.length){
+    if (board[r][c] == -1){
       // horizontal
       for (int i = 0; i < board[r].length; i++){
         board[r][i]--;
@@ -128,7 +128,7 @@ public class QueenBoard{
       // decrease first value
       int x = r - 1;
       int y = c + 1;
-      while (y < board.length && x >= 0){
+      while (y < board.length && x >= 0 && board[x][y] - 1 >= 0){
         board[x][y]--;
         x--;
         y++;
@@ -137,7 +137,7 @@ public class QueenBoard{
       // decrease second value
       x = r + 1;
       y = c - 1;
-      while (y >= 0 && x < board.length){
+      while (y >= 0 && x < board.length && board[x][y] - 1 >= 0){
         board[x][y]--;
         x++;
         y--;
@@ -146,7 +146,7 @@ public class QueenBoard{
       // decrease both values
       x = r - 1;
       y = c - 1;
-      while (x >= 0 && y >= 0){
+      while (x >= 0 && y >= 0 && board[x][y] - 1 >= 0){
         board[x][y]--;
         x--;
         y--;
@@ -155,7 +155,7 @@ public class QueenBoard{
       // increase both values
       x = r + 1;
       y = c + 1;
-      while (x < board.length && y < board.length){
+      while (x < board.length && y < board.length && board[x][y] - 1 >= 0){
         board[x][y]--;
         x++;
         y++;
