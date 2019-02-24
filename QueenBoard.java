@@ -1,6 +1,7 @@
 public class QueenBoard{
   // TESTING
   public static void main(String[] args){
+    /*
     QueenBoard board1 = new QueenBoard(8);
 
     // should print out empty board
@@ -25,6 +26,57 @@ public class QueenBoard{
 
     // should have no queens
     System.out.println(board1);
+    */
+
+    // DRIVER THAT VISHWAA GAVE ME
+    QueenBoard  board = new QueenBoard(0); // testing with size 0
+    System.out.println(board.countSolutions());
+    System.out.println("0 \n"); // actual result to match with program's result
+    QueenBoard  board1 = new QueenBoard(1); // testing with size 1
+    System.out.println(board1.countSolutions());
+    System.out.println("1 \n"); // actual result to match with program's result
+    QueenBoard  board2 = new QueenBoard(2); // testing with size 2
+    System.out.println(board.countSolutions());
+    System.out.println("0 \n"); // actual result to match with program's result
+    QueenBoard  board3 = new QueenBoard(3); // testing with size 3
+    System.out.println(board3.countSolutions());
+    System.out.println("0 \n"); // actual result to match with program's result
+    QueenBoard  board4 = new QueenBoard(4); // testing with size 4
+    System.out.println(board4.countSolutions());
+    System.out.println("2 \n"); // actual result to match with program's result
+    QueenBoard  board5 = new QueenBoard(5); // testing with size 5
+    System.out.println(board5.countSolutions());
+    System.out.println("10 \n"); // actual result to match with program's result
+    QueenBoard  board6 = new QueenBoard(6); // testing with size 6
+    System.out.println(board6.countSolutions());
+    System.out.println("4 \n"); // actual result to match with program's result
+    QueenBoard  board7 = new QueenBoard(7); // testing with size 7
+    System.out.println(board7.countSolutions());
+    System.out.println("40 \n"); // actual result to match with program's result
+    QueenBoard  board8 = new QueenBoard(8); // testing with size 8
+    System.out.println(board8.countSolutions());
+    System.out.println("90 \n"); // actual result to match with program's result
+    QueenBoard  board9 = new QueenBoard(9); // testing with size 9
+    System.out.println(board9.countSolutions());
+    System.out.println("352 \n"); // actual result to match with program's result
+    QueenBoard  board10 = new QueenBoard(10); // testing with size 10
+    System.out.println(board10.countSolutions());
+    System.out.println("724 \n"); // actual result to match with program's result
+    QueenBoard  board11 = new QueenBoard(11); // testing with size 11
+    System.out.println(board11.countSolutions());
+    System.out.println("2680 \n"); // actual result to match with program's result
+    QueenBoard  board12 = new QueenBoard(12); // testing with size 12
+    System.out.println(board12.countSolutions());
+    System.out.println("14200 \n"); // actual result to match with program's result
+    QueenBoard  board13 = new QueenBoard(13); // testing with size 13
+    System.out.println(board13.countSolutions());
+    System.out.println("73712 \n"); // actual result to match with program's result
+    QueenBoard  board14 = new QueenBoard(14); // testing with size 14
+    System.out.println(board14.countSolutions());
+    System.out.println("365596	\n"); // actual result to match with program's result
+    QueenBoard  board15 = new QueenBoard(16); // testing with size 15
+    System.out.println(board.countSolutions());
+    System.out.println("2279184 \n"); // actual result to match with program's result
   }
 
   // instance variables
@@ -241,12 +293,11 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public int countSolutions(){
-    for (int r = 0; r < board.length; r++){
-      for (int c = 0; c < board[r].length; r++){
-        if (board[r][c] != 0){
-          throw new IllegalStateException();
-        }
-      }
+    if (board.length == 0){
+      return 0;
+    }
+    if (board[0][0] != 0){
+      throw new IllegalStateException("Negative value!");
     }
     return countSolutionsHelper(0);
   }
@@ -255,6 +306,9 @@ public class QueenBoard{
     int numSolutions = 0;
     if (col == board.length){
       return 1;
+    }
+    if (col < 0){
+      throw new IllegalStateException("Negative value!");
     }
     for (int row = 0; row < board.length; row++){
       if (addQueen(row, col)){
