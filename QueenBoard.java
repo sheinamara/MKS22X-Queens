@@ -1,6 +1,11 @@
 public class QueenBoard{
   // TESTING
   public static void main(String[] args){
+    QueenBoard board1 = new QueenBoard(5);
+    System.out.println(board1.countSolutions());
+    for (int x = 0; x < 6; x++){
+      board1.runTest(x);
+    }
     /*
     QueenBoard board1 = new QueenBoard(8);
 
@@ -28,6 +33,7 @@ public class QueenBoard{
     System.out.println(board1);
     */
 
+    /*
     // DRIVER THAT VISHWAA GAVE ME
     QueenBoard  board = new QueenBoard(0); // testing with size 0
     System.out.println(board.countSolutions());
@@ -77,6 +83,7 @@ public class QueenBoard{
     QueenBoard  board15 = new QueenBoard(16); // testing with size 15
     System.out.println(board.countSolutions());
     System.out.println("2279184 \n"); // actual result to match with program's result
+    */
   }
 
   // instance variables
@@ -321,21 +328,21 @@ public class QueenBoard{
 
   // FROM MR. K
   //testcase must be a valid index of your input/output array
-public static void runTest(int i){
-  QueenBoard b;
-  int[]tests =   {1,2,3,4,5,8};
-  int[]answers = {1,0,0,2,10,92};
-  if(i >= 0 && i < tests.length ){
-    int size = tests[i];
-    int correct = answers[i];
-    b = new QueenBoard(size);
-    int ans  = b.countSolutions();
+  public static void runTest(int i){
+    QueenBoard b;
+    int[]tests =   {1,2,3,4,5,8};
+    int[]answers = {1,0,0,2,10,92};
+    if(i >= 0 && i < tests.length ){
+      int size = tests[i];
+      int correct = answers[i];
+      b = new QueenBoard(size);
+      int ans  = b.countSolutions();
 
-    if(correct==ans){
-      System.out.println("PASS board size: "+tests[i]+" "+ans);
-    }else{
-      System.out.println("FAIL board size: "+tests[i]+" "+ans+" vs "+correct);
+      if(correct==ans){
+        System.out.println("PASS board size: "+tests[i]+" "+ans);
+      }else{
+        System.out.println("FAIL board size: "+tests[i]+" "+ans+" vs "+correct);
+      }
     }
   }
-}
 }
